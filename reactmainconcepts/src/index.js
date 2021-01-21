@@ -5,16 +5,28 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 //const name="Kanhav Mathur";
-function formatname(user) {
-  return user.firstname+' '+user.lastname;
+// function formatname(user) {
+//   return user.firstname+' '+user.lastname;
+// }
+
+// const user={
+//   firstname:'Kanhav',
+//   lastname:'Mathur'
+// }; 
+
+// const element=(<h1 className="greeting"> Hello, {formatname(user)}!!</h1>);
+
+function Welcome(props) {
+  return (<h1>Hello, {props.name}</h1>)
 }
 
-const user={
-  firstname:'Kanhav',
-  lastname:'Mathur'
-}; 
+// class Welcome extends React.Component {
+//   render() {
+//     return <h1>Hello, {this.props.name}!!</h1>
+//   }
+// }
 
-const element=(<h1 className="greeting"> Hello, {formatname(user)}!!</h1>);
+const element = <Welcome name="Goku" />
 
 ReactDOM.render(
   // <React.StrictMode>
