@@ -4,10 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//const name="Kanhav Mathur";
+function formatname(user) {
+  return user.firstname+' '+user.lastname;
+}
+
+const user={
+  firstname:'Kanhav',
+  lastname:'Mathur'
+}; 
+
+const element=(<h1 className="greeting"> Hello, {formatname(user)}!!</h1>);
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>,
+  element,
   document.getElementById('root')
 );
 
