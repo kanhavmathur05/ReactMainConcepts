@@ -4,35 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-//const name="Kanhav Mathur";
-// function formatname(user) {
-//   return user.firstname+' '+user.lastname;
-// }
-
-// const user={
-//   firstname:'Kanhav',
-//   lastname:'Mathur'
-// }; 
-
-// const element=(<h1 className="greeting"> Hello, {formatname(user)}!!</h1>);
-
-// function Welcome(props) {
-//   return (<h1>Hello, {props.name}</h1>)
-// }
-
-class Welcome extends React.Component {
-  render() {
-    return <h1>Hello, {this.props.name}!!</h1>
-  }
-}//
-
-const element = <Welcome name="Goku" />
+//const element = <Welcome name="Goku" /> 
 
 ReactDOM.render(
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>,
-  element,
+   <React.StrictMode>
+     <App />
+   </React.StrictMode>,
+  
   document.getElementById('root')
 );
 
