@@ -4,6 +4,8 @@ import './index.css';
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
+import HandleEventsComponents from './HandleEventsComponents';
+
 function FormattedDate(props)
 {
   return <h2>It is child formatted date {props.date.toLocaleTimeString()}. </h2>;
@@ -39,14 +41,53 @@ class Clock extends React.Component
   }//
 }
 
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // This binding is necessary to make `this` work in the callback
+// Method 1    this.handleClick = this.handleClick.bind(this);
+  }
+  //Method 1 - using bind function
+  // handleClick() {
+  //   this.setState(state => ({
+  //     isToggleOn: !state.isToggleOn
+  //   }));
+  // }
+
+  //Method 2 - Using public class field syntax
+  handleClick = ()=> {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
+
+  //Method 3 is using arrow functions which is not recommended in some cases
+  render() {
+    return (
+      <div>
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      {/* <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button> */}
+      </button>
+      </div>
+
+    );
+  }
+}
+
+
 function tick()
 {
   ReactDOM.render(
     // <React.StrictMode>
 //       <App />
     // </React.StrictMode>,
-    <Clock />,
-   document.getElementById('root')
+//    <Clock />,
+//    <HandleEventsComponents/>,
+      <Toggle />,
+      document.getElementById('root')
  );
 }
 
