@@ -1,10 +1,86 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM, { render } from 'react-dom';
 import './index.css';
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 import HandleEventsComponents from './HandleEventsComponents';
+
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = {isLoggedIn: false};
+  }
+
+  handleLoginClick() {
+    this.setState({isLoggedIn: true});
+  }
+
+  handleLogoutClick() {
+    this.setState({isLoggedIn: false});
+  }
+
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />;
+    }
+
+    return (
+      <div>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {button}
+      </div>
+    );
+  }
+}
+
+function LoginButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Login
+    </button>
+  );
+}
+
+function LogoutButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Logout
+    </button>
+  );
+}
+
+function UserGreeting(props)
+{
+  return <div><h1>User Greeting!!</h1></div>
+}
+
+function GuestGreeting(props)
+{
+  return <div><h1>Guest Greeting!!</h1></div>
+}
+
+function Greeting(props) {
+  const isLoggedIn=props.isLoggedIn;
+  if(isLoggedIn)
+  {
+    return (<div>
+      <UserGreeting />
+    </div>);
+  }
+  else
+  {
+    return (<div>
+        <GuestGreeting />
+      </div>);
+  }
+}
 
 function FormattedDate(props)
 {
@@ -78,22 +154,78 @@ class Toggle extends React.Component {
 }
 
 
-function tick()
+function MailBox(props) {
+    const unreadmessages=props.unreadmessages;
+    return (
+      <div>
+        <h1>Hello</h1>
+          {unreadmessages.length > 0 && <h2>
+              You have {unreadmessages.length} unread messages.
+            </h2>}        
+      </div>
+    );
+  }
+
+const messages=['React', 'Re: React', 'Re:Re: React','asdf'];
+
+function WarningBanner(props)
 {
+  if(props.warn)
+  {
+    return null;
+  }
+  return (
+    <div className="warning">
+      <h1>Warning!!</h1>
+    </div>
+  );
+}
+
+class Page extends React.Component {
+  constructor(props)
+  {
+    super(props);
+    this.state={showWarning:true};
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick =() => {
+    this.setState(prevstate => ({
+      showWarning: !prevstate.showWarning  
+    }));
+  }
+
+  render() {
+    return (
+      <div>
+        <WarningBanner warn={this.state.warning} />
+        <button onClick={this.handleToggleClick}>
+          {this.state.showWarning ? 'Hide' : 'Show'}
+        </button>
+      </div>
+    );
+  }
+}
+
+//function tick()
+//{
   ReactDOM.render(
     // <React.StrictMode>
 //       <App />
     // </React.StrictMode>,
 //    <Clock />,
 //    <HandleEventsComponents/>,
-      <Toggle />,
-      document.getElementById('root')
+//      <Toggle />,
+//      <Greeting isLoggedIn={true}/>,
+//    <LoginControl />,
+//    <MailBox unreadmessages={messages} />,
+    <Page />,
+    document.getElementById('root')
  );
-}
-
+//}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-setInterval(tick,1000);
+//setInterval(tick,1000);
